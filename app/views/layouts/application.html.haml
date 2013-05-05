@@ -14,6 +14,7 @@
   %body{class: "#{controller_name} #{action_name}"}
     .main-container.container
       = render 'announcements' if user_signed_in?
+      = render 'server_data' if user_signed_in?
       = render 'header'
       = render 'flash_messages', :flash => flash, :on_landing_page => false
       .page-container
@@ -21,4 +22,5 @@
 
     - if Rails.env.production? || Rails.env.staging?
       = render 'google_analytics'
+      = javascript_include_tag 'loomio_metrics'
       /= piwik_tracking_tag # Disabling piwik until we've moved it over to our own server
