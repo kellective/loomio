@@ -17,5 +17,19 @@
       %th.nowrap= t("email.create_discussion.started_by")
       %td
         = @discussion.author.name
+    -if @rendered_discussion_description.present?
+      %tr
+        %th
+          &nbsp;
+        %td
+          &nbsp;
+      %tr
+        %th
+          Details
+        %td
+          = @rendered_discussion_description
+
+  %p
+    = link_to("Click here to view this discussion", discussion_url(@discussion))
 
   = render 'user_mailer/unsubscribe_link'

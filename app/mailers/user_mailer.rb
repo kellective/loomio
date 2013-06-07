@@ -38,6 +38,7 @@ class UserMailer < BaseMailer
     @user = user
     @motion = motion
     set_email_locale(user.language_preference, @motion.author.language_preference)
+    @rendered_motion_description = render_rich_text(motion.description, false) #later: change false to motion.uses_markdown
     mail to: user.email,
          reply_to: @motion.author.email,
          subject: "[Loomio - #{@motion.group.name}] Proposal closing soon: #{@motion.name}"

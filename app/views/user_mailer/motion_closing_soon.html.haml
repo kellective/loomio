@@ -16,13 +16,13 @@
         %th.nowrap= t "email.proposal_closing_soon.closes_in"
         %td= time_ago_in_words(@motion.close_at) + " (" + @motion.close_at.localtime.strftime('%a %d %b %Y, %I:%M%p, %Z') + ")"
 
-    - if @motion.description.present?
+    - if @rendered_motion_description.present?
       %tr
         %th &nbsp;
         %td &nbsp;
       %tr
         %th= t :details
-        %td= @motion.description
+        %td= @rendered_motion_description
     %tr
       %th &nbsp;
       %td &nbsp;
@@ -57,5 +57,7 @@
               %td.border-bottom
                 -if vote.statement.present?
                   = vote.statement
+
+  %p #{link_to 'Click here', motion_url(@motion)} to visit this proposal on loomio
 
   =render 'unsubscribe_link'

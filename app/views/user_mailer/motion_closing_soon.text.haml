@@ -16,7 +16,9 @@
 = "#{t :details}:"
 = @motion.description
 \
-= "#{t 'email.proposal_closing_soon.summary'}:"
+- if @motion.description.present?
+  = "#{t 'email.proposal_closing_soon.summary'}:"
+  =@motion.description
 \
 - @motion.votes_for_graph.each do |results|
   = results[0]

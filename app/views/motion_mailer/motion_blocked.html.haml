@@ -7,7 +7,7 @@
   %table
     %tr
       %th= t :proposal
-      %td= @motion.name
+      %td= link_to @motion.name, discussion_url(@motion.discussion, proposal: @motion)
     %tr
       %th= t :discussion
       %td= @discussion.title
@@ -15,12 +15,16 @@
       %th= t :group
       %td= @motion.group.name
 
-    - if @motion.description.present?
+
+    - if @rendered_motion_description.present?
       %tr
         %th &nbsp;
         %td &nbsp;
       %tr
         %th= :details
-        %td= @motion.description
+        %td= @rendered_motion_description
+
+  %p
+    = link_to("Click here to view this proposal", "#{discussion_url(@motion.discussion, proposal: @motion)}")
 
   = render 'user_mailer/unsubscribe_link'

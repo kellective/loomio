@@ -1,8 +1,20 @@
-# RAILS_ENV=test TEST_EMAIL=mailcatcher rails runner lib/tasks/email_test.rb
-# RAILS_ENV=test TEST_EMAIL=sendgrid rails runner lib/tasks/email_test.rb
+####To send to Mailcatcher####
+#1. Start mailcatcher in terminal (if you need to install it, run `gem install mailcatcher`)
+#2. Open mailcatcher in your browser at http://localhost:1080
+#3. in terminal, run:
+#      RAILS_ENV=test TEST_EMAIL=mailcatcher rails runner lib/tasks/email_test.rb
 
-#NB if using sendgrid, you need to have SENDGRID_USERNAME and SENDGRID_PASSWORD defined
-#NB change the let(:addresses) below to define external targets
+####To send using Sendgrid####
+#1. Start mailcatcher in terminal (if you need to install it, run `gem install mailcatcher`)
+#2. Open mailcatcher in your browser at http://localhost:1080
+#3. Make sure you have a sengrid username and password to send emails through sendgrid
+#4. In terminal, run:
+#      RAILS_ENV=test TEST_EMAIL=sendgrid SENDGRID_USERNAME=***** SENDGRID_PASSWORD=****** rails runner lib/tasks/email_test.rb
+
+#NB Edit the let(:addresses) below to define external targets  (~line 85)
+#NB If you are running this command several times, consider adding SENDGRID_USERNAME and SENDGRID_PASSWORD to your .bash_profile or .zshrc file
+#   To the bottom of the file add the lines like:
+#       export SENDGRID_USERNAME=*******
 
 require 'spec_helper'
 require 'faker'
@@ -34,6 +46,8 @@ def create_discussion(in_group)
      group:              in_group,
      author:             author,
      title:              Faker::Lorem.sentence(2),
+     description:        "# Kill the Loomio Helper Bot \n\nIs really keen for your group to  *get this done*. Apparently the space-cheese is delicious. But the implications for your carbon footprint are worrying.",
+     uses_markdown:      true,
      comments:           []
 end
 
@@ -49,7 +63,7 @@ end
 def create_motion(in_discussion)
   stub_model Motion,
       name:               Faker::Name.title,
-      description:        Faker::Lorem.paragraph(rand(4..12)),
+      description:        "Loomio Helper Bot is really keen for your group to invest in a trip to the moon. Apparently the space-cheese is delicious. But the implications for your carbon footprint are worrying.\n\nIs it a good idea? Loomio Helper Bot wants to know what you think!\n\nIf you're clear about your position, click one of the icons below (hover over the decision buttons for a description of what each one means).\n\nYou'll be prompted to make a short statement about the reason for your decision. This makes it easy to see a summary of what everyone thinks and why. You can change your mind and edit your decision freely until the proposal closes.",
       discussion:         in_discussion,
       group:              in_discussion.group,
       author:             author,

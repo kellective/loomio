@@ -12,4 +12,11 @@
 = "#{t('email.create_discussion.started_by')}:"
 = @discussion.author.name
 \
+
+-if @discussion.description.present?
+  \
+  Details:
+  = @discussion.description
+
+
 = render 'user_mailer/unsubscribe_link_text'
