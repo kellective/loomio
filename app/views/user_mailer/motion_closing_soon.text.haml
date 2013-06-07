@@ -11,11 +11,12 @@ Group:
 Author:
 =@motion.author.name
 \
-Closes in:
-=l @motion.close_date
+Closes at:
+=l @motion.close_at
 \
-Description:
-=@motion.description
+- if @motion.description.present?
+  Description:
+  =@motion.description
 \
 Summary
 \

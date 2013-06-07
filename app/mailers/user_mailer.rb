@@ -34,23 +34,10 @@ class UserMailer < ActionMailer::Base
   def motion_closing_soon(user, motion)
     @user = user
     @motion = motion
-    if motion.description.present?
-      @rendered_motion_description = render_rich_text(motion.description, false) #later: change false to motion.uses_markdown
-    else
-      @rendered_motion_description = ''
-    end
+    @rendered_motion_description = render_rich_text(motion.description, false) #later: change false to motion.uses_markdown
     mail to: user.email,
          reply_to: @motion.author.email,
          subject: "[Loomio - #{@motion.group.name}] Proposal closing soon: #{@motion.name}"
-  end
-
-  def added_to_group(membership)
-    @user = membership.user
-    @group = membership.group
-    @inviter = membership.inviter
-    mail( :to => @user.email,
-          :reply_to => @group.admin_email,
-          :subject => "[Loomio] You've been added to a group called '#{@group.full_name}'")
   end
 
   # Invited to loomio (assumes user has been invited to a group at the same time)

@@ -2,6 +2,11 @@ en:
   errors:
     messages:
       email: "Not a valid email address"
+
+  date:
+    formats:
+      datepicker: "%d-%m-%Y"
+
   error:
     access_denied: "Access denied."
     cant_join_subgroup: "You cannot join a sub-group if you are not a member of the parent group."
@@ -10,15 +15,24 @@ en:
     cant_view_member_profile: "You're unable to view the member's profile because you are not in the same group."
     discussion_not_created: "Discussion could not be created."
     group_not_archived: "Group could not be archived."
-    invalid_email: "%{which_email} was not invited. Please check the email address is correct."
     invalid_close_date: "Invalid close date, please check this date has not passed."
+    invalid_email: "Please enter at least one valid email address"
     image_upload_fail: "Unable to upload picture. Make sure the picture is under 1 MB and is a .jpeg, .png, or .gif file."
     permission_to_invite: "You do not have permission to invite new members."
     position_not_updated: "Could not update position."
     settings_not_updated: "Your settings did not get updated."
+    group_request_already_verified: "Sorry! The verification link you clicked has already been confirmed. If you haven't heard from us within 48 hours, get in touch: contact@loomio.org"
+    group_request_already_accepted: "Sorry! This invitation is invalid or has already been accepted."
+    group_request_contribution: "Please select a category. This isn’t a commitment to pay, just useful information to help us design our model. Thanks!"
+    group_request_invalid_token: "Sorry! This is an invalid token"
+    group_private_or_not_found: "Group not found. \n\nThis group might be private. If someone gave you this link, ask them to invite you to the group."
+    group_already_setup: "The group you are trying to setup already exists."
+    not_permitted_to_setup_group: "You do not have permission to setup this group."
     proposal_already_exists: "There is already an open proposal in this discussion."
   alert:
     duplicate_email: "%{which_email} is already in the group."
+    not_found: "%{item} not found\n\nIt may have been deleted."
+
   notice:
     admin_rights_removed: "%{which_user}'s admin rights have been removed."
     email_added: "%{which_email} has been added to the group."
@@ -36,9 +50,9 @@ en:
     membership_request_already_canceled: "Membership request has already been canceled."
     position_not_submitted: "Your position could not be submitted"
     proposal_not_created: "Proposal could not be created"
-    user_already_admin: "%{which_user} is already an admin."
-    user_already_member: "User is already a member of this group"
-    user_not_admin: "%{which_user} is not an admin"
+    user_already_admin: "%{which_user} is already an admin of this group."
+    user_already_member: "%{which_user} is already a member of this group."
+    user_not_admin: "Sorry, %{which_user} must be an admin of this group to access this."
   success:
     added_to_group: "You have been added to %{which_group}."
     close_date_changed: "Close date successfully changed."
@@ -88,10 +102,6 @@ en:
         one:   "1 year"
         other: "%{count} years"
 
-  discussion_help_text: "This is the Discussion page. The discussion topic is at the top of the page, followed by background information and context.\n\n Discussion is on the left, to add a comment, write in the text box and click ‘Post comment’.\n\n Decisions are on the right. If you think the group is ready to make a decision, you can make a proposal for the group to consider. If someone has already made a proposal, you can see how the group feels on the pie graph, and state your position underneath.\n\n"
-  group_help_text: "This is the Group page for %{group_name}.\n\n Here you can see this group’s discussions, a description of what the group is for, You can start a discussion on a new topic by clicking on the ‘Start a discussion’ button.\n\n"
-  dashboard_help_text: "Welcome to Loomio!\n This is the Home page, where you can see a list of the discussions going on in all of your groups. To the right is a list of the groups you are a member of. You can start a discussion on a new topic by clicking on the “Start a discussion” button.\n\n If you have any questions or feedback we’d love to hear from you: %{link}\n\n"
-
   notifications:
     header: "Notifications"
     new_discussion: "started a new discussion"
@@ -116,19 +126,30 @@ en:
   user_settings: "User Settings"
   email_preferences: "Email Preferences"
   sign_out: "Sign out"
-  feedback: "Give us feedback"
   sign_in: "Sign in"
   sign_in_details: "to participate. You are currently logged out."
   tagline: "Creating a world where it's easy for anyone to participate in decisions that affect them."
 
-  not_found: "%{item} not found"
-  not_found_details: "It may have been deleted."
   click_to_dismiss: "Click here to dismiss this message"
   generic_confirm: "Are you sure?"
+
+  discussion_helper_text:
+    header: "Welcome to your first discussion"
+    message: "<p>The topic is at the top of the page, with context underneath.</p><p>Discussion is on the left, decisions come up on the right. If you think the group is ready to make a decision, you can make a proposal for the group to consider.</p>"
+  group_helper_text:
+    header: "Welcome to your new group!"
+    message: "<p>This is the <strong>group page</strong>. On the left is a list of all the discussions in this group.</p><p>When you want the group to discuss another topic, start a new discussion.</p>"
+  dashboard_helper_text:
+    header: "Welcome to your Home page"
+    message: "<p>The home page shows you all of the current discussions in all the groups you are a member of.</p><p>You can start a discussion on a new topic by clicking the “Start a discussion” button.</p>"
 
   #
   # GROUP PAGE
   #
+
+  invite_people: "Invite people"
+  pending_invitations: 'Pending invitations'
+  edit_memberships: 'Edit memberships'
 
   add_new_member: "Add new member"
   invite_members_to_group: "Invite members to %{which_group}"
@@ -186,9 +207,6 @@ en:
   update_group: "Update group"
   updating_group: "Updating group"
 
-  group_not_found: "Group not found."
-  group_not_found_details: "This group might be private. If someone gave you this link, ask them to invite you to the group."
-
   start_a_discussion: "Start a discussion"
   group_description: "Group description"
 
@@ -211,7 +229,7 @@ en:
   previous_decisions: "Previous decisions"
   see_previous_decisions: "See previous decisions"
   create_new_proposal: "Create new proposal"
-  empty_decision_list: "There is not currently an open proposal."
+  empty_decision_list_html: "Ready to make a decision? <br> Anyone can start a proposal."
   empty_decision_index: "This group has not made any decisions yet."
   empty_discussion_list: "There is no activity in this discussion yet."
   empty_discussion_index: "There are no discussions in any of your groups."
@@ -276,6 +294,35 @@ en:
   outcome: "Outcome"
   outcome_placeholder: "What was the outcome of this proposal?"
 
+
+  #
+  # HELP PAGES
+  #
+
+  help:
+    build_shared_understanding: "Build shared understanding"
+    build_shared_understanding_description: "As the conversation progresses and new information comes to light, you can change your position as many times as you like until the proposal closes. If the group isn’t in love with the first proposal, anyone can suggest a better one and keep moving forward. Through this dynamic process, the collective wisdom of your group can generate better ideas than anyone would have come up with on their own."
+    get_in_touch: "Get in touch"
+    get_in_touch_description_html: "If you have any questions or feedback, send us an email: <a href='mailto:contact@loomio.org'>contact@loomio.org</a>"
+    getting_started: "Getting started"
+    getting_started_description: "On the left, the group discusses a topic, exchanging ideas and information. When there’s a decision for the group to make, it comes up on the right."
+    have_a_discussion: "Have a discussion"
+    have_a_discussion_description: "The topic and any relevant background information sit at the top of the page. Use the comment box to add your voice to the discussion."
+    help: "Help"
+    how_it_works: "How it works"
+    join_the_community: "Join the community"
+    join_the_community_description_html: "Everyone is welcome to join the Loomio Community, where we talk about how to make the most of the tool, and how it can be improved.<br /><br /><a href='https://www.loomio.org/groups/3'>Click here to go the Loomio Community group</a>, where you can request membership."
+    video_tutorial: "Video tutorial"
+    video_tutorial_description: "Check out the video for a quick demonstration of how to use Loomio."
+    make_a_decision: "Make a decision"
+    make_a_decision_description: "When the conversation has gone on for a while, anyone can make a proposal. When you’re ready to have your say, click one of the four decision buttons:"
+    positions_agree_description: "<span>Agree</span> means you’re happy with the proposal."
+    positions_abstain_description: "<span>Abstain</span> means you’re unsure, or you’re happy for the group to decide without you."
+    positions_disagree_description: "<span>Disagree</span> means you think there might be a better alternative, but you’re willing to go with the group’s decision."
+    positions_block_description: "<span>Block</span> means you’ve got serious objections and you’ll be extremely unhappy if this proposal goes ahead."
+    see_how_everyone_feels: "See how everyone feels"
+    see_how_everyone_feels_description: "When you’ve made your decision, you’ll be prompted to give a brief summary statement explaining why you feel that way. Underneath the pie, you can see how other people in the group have decided. These short statements make it really easy to catch up with where the discussion is up to."
+
   #
   # SIGN IN
   #
@@ -299,6 +346,38 @@ en:
   forgot_your_password: "Forgot your password?"
   confirmation_not_received: "Didn't receive confirmation instructions?"
   unlock_not_received: "Didn't receive unlock instructions?"
+
+  #
+  # INVITATIONS
+  #
+
+  invitation:
+    invitation_not_found:  'Could not find invitation with that token. Please ask for a new invitation from the sender.'
+    invitation_cancelled: 'This invitation has been cancelled. Please contact the sender of the invitation if you believe this was done in error.'
+    invitation_already_used: 'This invitation has already been used. Please sign in to continue to your group.'
+    invites_header: "Invite your group members"
+    recipients: "Enter email addresses, seperated by commas:"
+    invitees_placeholder: "User Name <user1@example.com>, user2@example.com"
+    subject: "Please join our new Loomio group, %{group}"
+    body_editable: |
+      Hi,
+
+      I’ve been looking into a new online tool for collaborative decision-making called Loomio that could be useful for our group. It looks like a great way to make decisions between meetings without a mountain of emails.
+
+      You can see how it works here: http://loomio.org/how-it-works/
+
+    message_body: "Invitation message"
+    invites_more_help: "You can customise the invitation your members receive, to explain what your group will be using Loomio for and why it’s worth their time to get involved."
+    invites_more_help1: "When you're ready, click 'finish setup' to send invitations and go to your brand new group!"
+    invites_more_help2: "<p>You can invite people to your group at any time.</p><p>You might want to invite all your members in right away, or you could start by inviting just the people you’re working most closely with.</p>"
+    send_invitations: "Send invitations"
+    invitation_link: "Invitation link"
+    copy: "If someone did not get their invitation email, please feel free to copy the invitation link above and give it to the recipient yourself."
+
+  verified_email:
+    subject: "Thanks for your request, you’re almost done!"
+  defered_email:
+    subject: "defered (placeholder)"
 
   #
   # FORMS
@@ -351,6 +430,31 @@ en:
     use_avatar_kind: "Use %{kind}"
     upload_new_image: "Upload a new image"
 
+  group_setup_form:
+    tabs:
+      intro: "Before you start"
+      group: "Set up your group"
+      discussion: "Start a discussion"
+      invites: "Invite your group"
+    group_header: "Set up your group"
+    group_settings_header: "Settings"
+    group_settings_blurb: "Setting up an engaging discussion relevant to your group before inviting people in will dramatically increase the likelihood of your group succeeding in using Loomio long-term."
+    group_more_help: "<p>The first question every new member will have is <em>what is this group for?</em></p><p>Think about the simplest way you can describe the group:<ul><li>What do you want to achieve together?</li><li>What types of decisions will you be making?</li><li>Who will be involved?</li></ul>"
+    discussion_header: "Start a discussion"
+    discussion_blurb: "Setting up an engaging discussion relevant to your group before inviting people in will dramatically increase the likelihood of your group succeeding in using Loomio long-term."
+    discussion_more_help: "<p>Make sure you start with a clear discussion that your group members can easily engage with, so people can jump in and start participating straight away.</p><p>Is your group already having a discussion that you could shift to Loomio?</p>"
+
+    errors:
+      group_name: "Please fill in the group title"
+      group_description: "Please fill in the group description"
+      discussion_title: "Please fill in the discussion title"
+      discussion_description: "Please fill in the discussion description"
+      motion_title: "Please fill in the motion title"
+      motion_description: "Please fill in the motion description"
+      motion_closing_inputs: "Please give a future close date"
+      admin_email: "Please fill in the an administrator email address"
+      invitees: "Please fill in the invited email addresse(s)"
+
   simple_form:
     labels:
       discussion:
@@ -368,6 +472,14 @@ en:
         email: "Email"
         password: "Password"
         language_preference: "Language"
+      group_setup:
+        group_name: "What is the name of your group?"
+        group_description: "Give a brief description of your group"
+        viewable_by: "Who can see this group?"
+        members_invitable_by: Who can invite members to this group?
+        discussion_name: "What’s the first topic you’d like to discuss with your group?"
+        discussion_description: "Introduce the topic and give enough information to get the conversation started:"
+
     placeholders:
       discussion:
         title: "What is the topic you'd like to discuss?"
@@ -375,9 +487,12 @@ en:
       motion:
         name: "What is your proposed course of action?"
         description: "Give enough information so that everyone knows exactly what it means to agree or disagree."
-
+      group_setup:
+        discussion_title: "What is the topic you would like to discuss?"
   helpers:
     submit:
+      group_setup:
+        create: "Finish setup"
       discussion:
         create: "Start discussion"
       motion:
@@ -402,6 +517,7 @@ en:
   closed: "Closed"
   delete: "Delete"
   edit: "Edit"
+  email: "Email"
   email_address: "Email address"
   enable: "Enable"
   participation: "Participation"
@@ -415,8 +531,11 @@ en:
   message: "Message"
   name: "Name"
   new_activity: "New activity"
+  next: "Next"
   password: "Password"
+  prev: "Prev"
   options: "Options"
+  ok_got_it: "Okay, got it!"
   save: "Save"
   saving: "Saving"
   sending: "Sending"
