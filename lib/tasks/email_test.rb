@@ -23,6 +23,7 @@ def create_user
   stub_model User,
       name:               Faker::Name.name,
       email:              Faker::Internet.email,
+      language_preference: "es",
       uses_markdown:      true,
       unsubscribe_token:  (('a'..'z').to_a+('0'..'9').to_a).sample(20).join,
       invitation_token:   (('a'..'z').to_a+('0'..'9').to_a).sample(20).join,
@@ -143,6 +144,7 @@ describe "Test Email:" do
 
       addresses.each do |email|
         admin.stub email: email
+        User.stub(:find_by_email).and_return(admin)
         GroupMailer.new_membership_request(membership).deliver
         puts " ~ SENT (#{email})"
       end
@@ -184,6 +186,7 @@ describe "Test Email:" do
       puts 'MOTION_CLOSED'
 
       addresses.each do |email|
+        User.stub(:find_by_email).and_return(admin)
         MotionMailer.motion_closed(motion, email).deliver
         puts " ~ SENT (#{email})"
       end
@@ -201,18 +204,22 @@ describe "Test Email:" do
     end
   end
 
-  describe "Start_group Mailer:" do
-    it "invite_admin_to_start_group" do
-      puts ' '
-      puts 'INVITE_ADMIN_TO_START_GROUP'
+  # describe "Start_group Mailer:" do
+  #   it "invite_admin_to_start_group" do
+  #     puts ' '
+  #     puts 'INVITE_ADMIN_TO_START_GROUP'
 
-      addresses.each do |email|
-        group_request.stub admin_email: email
-        StartGroupMailer.invite_admin_to_start_group(group_request).deliver
-        puts " ~ SENT (#{email})"
-      end
-    end
-  end
+  #     addresses.each do |email|
+  #       group_request.stub admin_email: email
+  #       StartGroupMailer.invite_admin_to_start_group(group_request).deliver
+  #       puts " ~ SENT (#{email})"
+  #     end
+  #   end
+  # end
+  #
+  # DEPRECATED
+  describe "verification"
+  describe "defer"
 
   describe "User Mailer:" do
     it "daily_activity" do
@@ -293,6 +300,7 @@ describe "Test Email:" do
 
       addresses.each do |email|
         user.stub email: email
+        User.stub(:find_by_email).and_return(admin)
         UserMailer.group_membership_approved(user, group).deliver
         puts " ~ SENT (#{email})"
       end
@@ -305,7 +313,7 @@ describe "Test Email:" do
       unique_votes = []
       rand(2..11).times { unique_votes << create_vote }
       motion.stub unique_votes: unique_votes
-
+      motion.stub close_at: Time.now + 1.hour
       addresses.each do |email|
         user.stub email: email
         UserMailer.motion_closing_soon(user, motion).deliver

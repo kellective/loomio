@@ -21,10 +21,7 @@
         %th &nbsp;
         %td &nbsp;
       %tr
-        %th= :details
+        %th= t :details
         %td= @rendered_motion_description
-
-  %p
-    = link_to("Click here to view this proposal", "#{discussion_url(@motion.discussion, proposal: @motion)}")
 
   = render 'user_mailer/unsubscribe_link'
