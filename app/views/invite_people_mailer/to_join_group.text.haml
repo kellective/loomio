@@ -1,8 +1,4 @@
 = @message_body
 \
-Click the following link to join the Loomio group:
+= t(:"invitation.link_help", group: @invitation.group.name)
 = invitation_url(@invitation)
-\
-\
-Warm regards
-= @invitation.inviter.name
