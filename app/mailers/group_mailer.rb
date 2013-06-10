@@ -7,9 +7,9 @@ class GroupMailer < BaseMailer
     @group = membership.group
     @admins = @group.admins.map(&:email)
     set_email_locale(User.find_by_email(@group.admin_email).language_preference, @user.language_preference)
-    mail( :to => @admins,
+    mail  :to => @admins,
           :reply_to => @group.admin_email,
-          :subject => "#{email_subject_prefix(@group.full_name)} New membership request from #{@user.name}")
+          :subject => "#{email_subject_prefix(@group.full_name)} " + t("email.membership_request.subject", who: @user.name)
   end
 
   def group_email(group, sender, subject, message, recipient)
